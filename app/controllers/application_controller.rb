@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  layout(false)
+  layout("wrapper")
 
   def homepage
     render({:template => "game_templates/rules.html.erb"})
