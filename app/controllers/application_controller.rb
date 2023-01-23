@@ -1,15 +1,40 @@
 class ApplicationController < ActionController::Base
   layout(false)
 
+  def homepage
+    render({:template => "game_templates/rules.html.erb"})
+  end
+
   def play_rock
     render({:template => "game_templates/user_rock.html.erb"})
   end
 
   def play_scissors
-    self.redirect_to("https://www.wikipedia.org")
+    @comp_move = ["rock", "scissors", "paper"].sample
+
+    if @comp_move == "rock" 
+      @outcome="lost"
+    elsif @comp_move == "paper"
+      @outcome="won"
+    elsif @comp_move == "scissors"
+      @outcome="tied"
+    end
+
+
+    render({:template => "game_templates/user_scissors.html.erb"})
   end
 
   def play_paper
-    self.redirect_to("https://www.wikipedia.org")
+
+    @comp_move = ["rock", "scissors", "paper"].sample
+
+    if @comp_move == "rock" 
+      @outcome="won"
+    elsif @comp_move == "paper"
+      @outcome="tied"
+    elsif @comp_move == "scissors"
+      @outcome="lost"
+    end
+    render({:template => "game_templates/user_paper.html.erb"})
   end
 end
